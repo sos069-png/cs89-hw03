@@ -8,7 +8,6 @@ import torch
 import torch.nn as nn
 import torchvision
 import torchvision.transforms.v2 as T
-from torch.utils.data import DataLoader
 
 # Select the best available device: CUDA GPU, Apple Silicon GPU (MPS), or CPU
 if torch.cuda.is_available():
@@ -30,11 +29,6 @@ test_data = torchvision.datasets.FashionMNIST(
 torch.manual_seed(42)
 train_data, valid_data = torch.utils.data.random_split(
     train_and_valid_data, [55_000, 5_000])
-
-torch.manual_seed(42)
-train_loader = DataLoader(train_data, batch_size=32, shuffle=True)
-valid_loader = DataLoader(valid_data, batch_size=32)
-test_loader = DataLoader(test_data, batch_size=32)
 
 if __name__ == "__main__":
     print(f"Using device: {device}")
