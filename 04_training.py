@@ -62,6 +62,7 @@ def train2(model, optimizer, criterion, metric, train_loader, valid_loader,
 
 n_epochs = 20
 history_path = "training_history.json"
+model_path = "model_weights.pt"
 xentropy = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 accuracy = torchmetrics.Accuracy(task="multiclass", num_classes=10).to(device)
@@ -72,3 +73,5 @@ if __name__ == "__main__":
     with open(history_path, "w") as f:
         json.dump(history, f, indent=2)
     print(f"Saved training history to {history_path}")
+    torch.save(model.state_dict(), model_path)
+    print(f"Saved trained model weights to {model_path}")
