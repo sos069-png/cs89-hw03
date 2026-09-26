@@ -1,20 +1,6 @@
-"""Step 5: plot training accuracy by epoch from the step-4 training history.
-
-Run 04_training.py first; it saves the history to training_history.json.
-"""
-
-import json
-import sys
+# Step 5: plot training accuracy by epoch from the training history
 
 import matplotlib.pyplot as plt
-
-history_path = "training_history.json"
-
-try:
-    with open(history_path) as f:
-        history = json.load(f)
-except FileNotFoundError:
-    sys.exit(f"{history_path} not found. Run 04_training.py first.")
 
 train_accuracy = history["train_metrics"]
 epochs = range(1, len(train_accuracy) + 1)

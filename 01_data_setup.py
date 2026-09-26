@@ -1,8 +1,6 @@
-"""Step 1: imports, device selection, and FashionMNIST dataset setup.
-
-Follows the "Building an Image Classifier with PyTorch" section of
-10_neural_nets_with_pytorch.ipynb.
-"""
+# Step 1: imports, device selection, and FashionMNIST dataset setup
+# (follows "Building an Image Classifier with PyTorch" in
+# 10_neural_nets_with_pytorch.ipynb)
 
 import torch
 import torch.nn as nn
@@ -30,11 +28,6 @@ torch.manual_seed(42)
 train_data, valid_data = torch.utils.data.random_split(
     train_and_valid_data, [55_000, 5_000])
 
-if __name__ == "__main__":
-    print(f"Using device: {device}")
-    print(f"Train: {len(train_data)}, valid: {len(valid_data)}, "
-          f"test: {len(test_data)}")
-    X_sample, y_sample = train_data[0]
-    print(f"Sample image shape: {tuple(X_sample.shape)}, "
-          f"dtype: {X_sample.dtype}, "
-          f"label: {train_and_valid_data.classes[y_sample]}")
+print(f"Using device: {device}")
+print(f"Train: {len(train_data)}, valid: {len(valid_data)}, "
+      f"test: {len(test_data)}")

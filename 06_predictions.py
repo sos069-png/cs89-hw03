@@ -1,32 +1,8 @@
-"""Step 6: predict classes for the first three images of a validation batch.
+# Step 6: predict classes for the first three images of a validation batch
 
-Follows the "Building an Image Classifier with PyTorch" section of
-10_neural_nets_with_pytorch.ipynb. Run 04_training.py first; it saves the
-trained weights to model_weights.pt.
-"""
-
-import importlib
-import sys
-
-import torch
 import torch.nn.functional as F
 
-# The step-2/3 module names start with a digit, so they can't be imported
-# with a plain `import` statement
-dataloaders = importlib.import_module("02_dataloaders")
-model_module = importlib.import_module("03_model")
-device = dataloaders.device
-valid_loader = dataloaders.valid_loader
-classes = dataloaders.train_and_valid_data.classes
-model = model_module.model
-
-model_path = "model_weights.pt"
-
-try:
-    model.load_state_dict(
-        torch.load(model_path, map_location=device, weights_only=True))
-except FileNotFoundError:
-    sys.exit(f"{model_path} not found. Run 04_training.py first.")
+classes = train_and_valid_data.classes
 
 model.eval()
 X_new, y_new = next(iter(valid_loader))

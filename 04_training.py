@@ -1,24 +1,7 @@
-"""Step 4: training and evaluation functions for the image classifier.
+# Step 4: training and evaluation functions for the image classifier
+# (train2() and evaluate_tm() from the reference notebook)
 
-Follows train2() and evaluate_tm() from 10_neural_nets_with_pytorch.ipynb,
-as used in its "Building an Image Classifier with PyTorch" section.
-"""
-
-import importlib
-import json
-
-import torch
-import torch.nn as nn
 import torchmetrics
-
-# The step-2/3 module names start with a digit, so they can't be imported
-# with a plain `import` statement
-dataloaders = importlib.import_module("02_dataloaders")
-model_module = importlib.import_module("03_model")
-device = dataloaders.device
-train_loader = dataloaders.train_loader
-valid_loader = dataloaders.valid_loader
-model = model_module.model
 
 
 def evaluate_tm(model, data_loader, metric):
@@ -61,17 +44,8 @@ def train2(model, optimizer, criterion, metric, train_loader, valid_loader,
 
 
 n_epochs = 20
-history_path = "training_history.json"
-model_path = "model_weights.pt"
 xentropy = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 accuracy = torchmetrics.Accuracy(task="multiclass", num_classes=10).to(device)
-
-if __name__ == "__main__":
-    history = train2(model, optimizer, xentropy, accuracy, train_loader,
-                     valid_loader, n_epochs)
-    with open(history_path, "w") as f:
-        json.dump(history, f, indent=2)
-    print(f"Saved training history to {history_path}")
-    torch.save(model.state_dict(), model_path)
-    print(f"Saved trained model weights to {model_path}")
+history = train2(model, optimizer, xentropy, accuracy, train_loader,
+                 valid_loader, n_epochs)
